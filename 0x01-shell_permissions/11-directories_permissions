@@ -1,2 +1,2 @@
 chmod u+x
-chmod -R +X
+chmod -R +X .
