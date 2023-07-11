@@ -1,6 +1,2 @@
 #!/bin/bash
-
-filename='*\''"Best School"'\''*$?*****:)'
-content="Best School"
-
-echo -e "$content" > "$filename"
+echo "Best School" > \\\*\\\\"'\"Best School\"\'\\*\\\\\*\$\\\?\\\*\\\*\\\*\\\*\*:\)
