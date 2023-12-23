@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+#ocde for listing bash process
 
 ps -a -x -u -f
