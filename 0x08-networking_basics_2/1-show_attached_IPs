@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Displays all acive IPv4 addresses on the machine.
+
+ip -o -4 addr show | awk '/scope global/ {print $4}' | cut -d '/' -f 1
+
