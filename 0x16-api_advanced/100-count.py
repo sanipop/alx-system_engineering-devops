@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""the advanced task parse for hot article"""
+"""Contains recurse function"""
 import requests
 
 
