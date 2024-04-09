@@ -1,34 +1,31 @@
+#!/usr/bin/python3
+"""Contains recurse function"""
 import requests
 
-def count_words(subreddit, word_list, after=None, counts=None):
-    if counts is None:
-        counts = {}
 
-    if after is None:
-        url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-    else:
-        url = "https://www.reddit.com/r/{}/hot.json?after={}".format(subreddit, after)
-        
-    headers = {'User-Agent': 'Mozilla/5.0'}
+def recurse(subreddit, hot_list=[], after="", count=0):
+    """Returns a list of titles of all hot posts on a given subreddit."""
+    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    headers = {
+        "User-Agent": "0x16-api_advanced:project:\
+v1.0.0 (by /u/firdaus_cartoon_jr)"
+    }
+    params = {
+        "after": after,
+        "count": count,
+        "limit": 100
+    }
+    response = requests.get(url, headers=headers, params=params,
+                            allow_redirects=False)
+    if response.status_code == 404:
+        return None
 
-    response = requests.get(url, headers=headers, allow_redirects=False)
+    results = response.json().get("data")
+    after = results.get("after")
+    count += results.get("dist")
+    for c in results.get("children"):
+        hot_list.append(c.get("data").get("title"))
 
-    if response.status_code != 200:
-        return
-
-    data = response.json()
-
-    for post in data['data']['children']:
-        title = post['data']['title'].lower()
-        for word in word_list:
-            word = word.lower()
-            if ' ' + word + ' ' in title or title.startswith(word + ' ') or title.endswith(' ' + word) or title == word:
-                counts[word] = counts.get(word, 0) + 1
-
-    next_after = data['data']['after']
-    if next_after:
-        return count_words(subreddit, word_list, next_after, counts)
-    else:
-        sorted_counts = sorted(counts.items(), key=lambda x: (-x[1], x[0]))
-        for word, count in sorted_counts:
-            print("{}: {}".format(word, count))
+    if after is not None:
+        return recurse(subreddit, hot_list, after, count)
+    return hot_list
