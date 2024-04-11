@@ -1,24 +1,18 @@
 #!/usr/bin/python3
-'''
-    Script to count top 10 subscribers in Reddit
-'''
-import requests
-from sys import argv
+"""Hot posts alert."""
 
 
 def top_ten(subreddit):
-    '''
-        function yo count the top 10 subscriber
-    '''
-    user = {'User-Agent': 'Lizzie'}
-    url = requests.get('https://www.reddit.com/r/{}/hot/.json?limit=10'
-                       .format(subreddit), headers=user).json()
-    try:
-        for post in url.get('data').get('children'):
-            print(post.get('data').get('title'))
-    except Exception:
-        print(None)
+    """Hot posts alert."""
+    import requests
 
-
-if __name__ == "__main__":
-    top_ten(argv[1])
+    the_results = requests.get("https://www.reddit.com/r/{}/hot.json?limit=10"
+                               .format(subreddit),
+                               headers={"User-Agent": "Erick_N"},
+                               allow_redirects=False)
+    if the_results.status_code >= 300:
+        print('None')
+    else:
+        [print(i.get("data").get("title"))
+         for i in the_results.json().get("data").get("children")]
+        
