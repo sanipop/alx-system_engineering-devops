@@ -14,7 +14,7 @@ def number_of_subscribers(subreddit):
     - If not a valid subreddit, return 0.
     """
     global after
-    user_agent = {'User-Agent': 'api_advanced-project'}
+    user_agent = {'User-Agent': 'popect'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     parameters = {'after': after}
     results = requests.get(url, params=parameters, headers=user_agent,
