@@ -1,14 +1,15 @@
 #!/usr/bin/python3
-"""task 0"""
-from requests import get
-
+'''This is a merely a commit about api'''
+import requests
 
 def number_of_subscribers(subreddit):
-    """returns subscriber count of a subreddit"""
-    user = {"User-Agent": "My-User-Agent"}
+    header = {"User-agent": "Chrome/120.0.0.0"}
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
-    with get(url, headers=user, allow_redirects=False) as page:
-        if page.status_code >= 300:
-            return 0l
-        data = page.json()
-        return data["data"]["subscribers"]
+    req = requests.get(url)
+    if req.status_code == 200:
+        try:
+            scrap = req.json()
+            num = scrap["data"]["subscribers"]
+            return (num)
+        except Exception as e:
+            return (0)
