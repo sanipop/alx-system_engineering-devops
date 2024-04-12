@@ -1,23 +1,19 @@
 #!/usr/bin/python3
-'''
-    this module contains the function number_of_subscribers
-'''
+"""This is the module to handle requests for sending
+HTTP requests to the Reddit API"""
 import requests
-from sys import argv
 
 
 def number_of_subscribers(subreddit):
-    '''
-        returns the number of subscribers for a given subreddit
-    '''
-    user = {'User-Agent': 'Onuja'}
-    url = requests.get('https://www.reddit.com/r/{}/about.json'
-                       .format(subreddit), headers=user).json()
-    try:
-        return url.get('data').get('subscribers')
-    except Exception:
+    """This is function that queries the Reddit API
+    and returns the number of subscribers"""
+    if not subreddit or type(subreddit) is not str:
         return 0
-
-
-if __name__ == "__main__":
-    number_of_subscribers(argv[1])
+    url = 'http://www.reddit.com/r/{}/about.json'.format(subreddit)
+    headers = {'User-Agent': '0x16-api_advanced:project:v1.0.0'}
+    r = requests.get(url, headers=headers)
+    if r.status_code == 200:
+        r = r.json()
+    else:
+        return 0
+    return r.get('data', {}).get('subscribers', 0)
