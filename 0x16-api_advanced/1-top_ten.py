@@ -1,18 +1,24 @@
 #!/usr/bin/python3
-'''This is about listing titles'''
+'''
+    this module contains the function top_ten
+'''
 import requests
+from sys import argv
+
 
 def top_ten(subreddit):
-''' This is about listing '''
-    header = {"User-Agent": "Chrome/120.0.0.0"}
-    url = "https://reddit.com/r/{}/hot".format(subreddit)
-    req = requests.get(url, params={'limit':10}, headers=header)
-    if req.status_code == 200:
-        try:
-            dt = req.json()
-            dt.get('data').get('children')
-            title = dt.get('data').get('title')
-            for x in data:
-                print(x)
-        except Exception:
-            print("None")
+    '''
+        returns the top ten posts for a given subreddit
+    '''
+    user = {'User-Agent': 'Lizzie'}
+    url = requests.get('https://www.reddit.com/r/{}/hot/.json?limit=10'
+                       .format(subreddit), headers=user).json()
+    try:
+        for post in url.get('data').get('children'):
+            print(post.get('data').get('title'))
+    except Exception:
+        print(None)
+
+
+if __name__ == "__main__":
+    top_ten(argv[1])
