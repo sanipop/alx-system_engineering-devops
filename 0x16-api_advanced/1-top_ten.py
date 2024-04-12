@@ -1,18 +1,24 @@
 #!/usr/bin/python3
-"""Hot posts alert."""
+'''
+    this module contains the function top_ten
+'''
+import requests
+from sys import argv
 
 
 def top_ten(subreddit):
-    """Hot posts alert."""
-    import requests
+    '''
+        returns the top ten posts for a given subreddit
+    '''
+    user = {'User-Agent': 'LU12e'}
+    url = requests.get('https://www.reddit.com/r/{}/hot/.json?limit=10'
+                       .format(subreddit), headers=user).json()
+    try:
+        for post in url.get('data').get('children'):
+            print(post.get('data').get('title'))
+    except Exception:
+        print(None)
 
-    the_results = requests.get("https://www.reddit.com/r/{}/hot.json?limit=10"
-                               .format(subreddit),
-                               headers={"User-Agent": "Erick_N"},
-                               allow_redirects=False)
-    if the_results.status_code >= 300:
-        print('None')
-    else:
-        [print(i.get("data").get("title"))
-         for i in the_results.json().get("data").get("children")]
-        
+
+if __name__ == "__main__":
+    top_ten(argv[1])
