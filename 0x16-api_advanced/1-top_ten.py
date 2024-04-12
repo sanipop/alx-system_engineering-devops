@@ -1,19 +1,19 @@
 #!/usr/bin/python3
-"""This is the module to handle requests for sending
-HTTP requests to the Reddit API"""
 import requests
+"""The Requests module for sending HTTP requests to the Reddit API"""
 
 
-def number_of_subscribers(subreddit):
-    """This is function that queries the Reddit API
-    and returns the number of subscribers"""
-    if not subreddit or type(subreddit) is not str:
-        return 0
-    url = 'http://www.reddit.com/r/{}/about.json'.format(subreddit)
+def top_ten(subreddit):
+    """A function that queries the Reddit API and prints the
+    titles of the first 10 hot posts listed for a given
+    subreddit
+    """
+    url = 'http://www.reddit.com/r/{}/hot/.json'.format(subreddit)
     headers = {'User-Agent': '0x16-api_advanced:project:v1.0.0'}
-    r = requests.get(url, headers=headers)
+    params = {'limit': 10}
+    r = requests.get(url, headers=headers, params=params)
     if r.status_code == 200:
-        r = r.json()
-    else:
-        return 0
-    return r.get('data', {}).get('subscribers', 0)
+        data = r.json().get('data')
+        [print(child["data"]["title"]) for child in data["children"]]
+        return
+    print('None')
