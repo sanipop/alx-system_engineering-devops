@@ -1,19 +1,14 @@
 #!/usr/bin/python3
-"""This is the module to handle requests for sending
-HTTP requests to the Reddit API"""
-import requests
+"""task 0"""
+from requests import get
 
 
 def number_of_subscribers(subreddit):
-    """This is function that queries the Reddit API
-    and returns the number of subscribers"""
-    if not subreddit or type(subreddit) is not str:
-        return 0
-    url = 'http://www.reddit.com/r/{}/about.json'.format(subreddit)
-    headers = {'User-Agent': 'sanipop_one_:v1.0.0'}
-    r = requests.get(url, headers=headers)
-    if r.status_code == 200:
-        r = r.json()
-    else:
-        return 0
-    return r.get('data', {}).get('subscribers', 0)
+    """returns subscriber count of a subreddit"""
+    user = {"User-Agent": "My-User-Agent"}
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    with get(url, headers=user, allow_redirects=False) as page:
+        if page.status_code >= 300:
+            return 0l
+        data = page.json()
+        return data["data"]["subscribers"]
