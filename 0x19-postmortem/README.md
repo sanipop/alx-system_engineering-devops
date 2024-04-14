@@ -28,3 +28,5 @@ Tasks to Address the Issue:
   5. Convene a grand assembly to reflect upon the lessons learned from the Great Authentication Blackout and chart a course towards a brighter, bug-free future.
 
 May the kingdom's digital realm remain secure and the users' access forever unimpeded!
+
+![Alt text](image_url)
