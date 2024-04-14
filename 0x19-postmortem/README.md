@@ -14,7 +14,7 @@ Timeline:
 
 
 
-![Alt text](image_url)
+![Alt text](https://github.com/sanipop/alx-system_engineering-devops/blob/master/0x19-postmortem/Screenshot_20240414-152558.jpg)
 
 
 Root Cause and Resolution:
