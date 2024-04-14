@@ -11,6 +11,12 @@ Timeline:
 11:30 AM: With the clock ticking and the pressure mounting, a breakthrough emerged from the depths of the code, revealing a mischievous bug lurking in the shadows of a recent deployment.
 12:00 PM: Victory was claimed as the bug was squashed, the faulty code rolled back, and the backend services resurrected from their digital slumber.
 
+
+
+
+![Alt text](image_url)
+
+
 Root Cause and Resolution:
 Root Cause: The mischievous bug, disguised as a harmless line of code, infiltrated the kingdom during a recent deployment, wreaking havoc on authentication processes.
 Resolution: The bug met its demise as the faulty code was banished, and the kingdom's defenses were reinforced, ensuring the safety of user access.
