@@ -29,4 +29,4 @@ Tasks to Address the Issue:
 
 May the kingdom's digital realm remain secure and the users' access forever unimpeded!
 
-![Alt text](image_url)
+![Alt text](https://github.com/sanipop/alx-system_engineering-devops/blob/master/0x19-postmortem/Screenshot_20240414-152746.jpg)
